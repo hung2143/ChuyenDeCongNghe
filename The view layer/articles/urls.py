@@ -27,3 +27,27 @@ urlpatterns = [
     path("", views.IndexView.as_view(), name="index"),
     path("detail/<int:pk>/", views.DetailView.as_view(), name="detail"),
 ]
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            BASE_DIR / 'templates',  # Global templates directory
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
+                'articles.context_processors.site_info',  # Custom context processor
+            ],
+            'debug': True,  # Template debug mode
+            'string_if_invalid': '[INVALID: %s]',  # Show invalid variables
+        },
+    },
+]
