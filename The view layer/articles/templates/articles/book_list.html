@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book List (Articles)</title>
+</head>
+<body>
+    <h1>Book List View (Using Articles)</h1>
+    {% for article in article_list %}
+        <div>
+            <h3>{{ article.title }}</h3>
+            <p>{{ article.content|truncatewords:20 }}</p>
+        </div>
+    {% empty %}
+        <p>No books available.</p>
+    {% endfor %}
+</body>
+</html>
