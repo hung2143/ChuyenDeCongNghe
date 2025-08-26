@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Django Templates Lab{% endblock %}</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+        .header { background: #333; color: white; padding: 1rem; margin-bottom: 2rem; }
+        .nav { background: #f4f4f4; padding: 1rem; margin-bottom: 2rem; }
+        .nav a { margin-right: 1rem; text-decoration: none; color: #333; }
+        .nav a:hover { color: #007cba; }
+        .content { min-height: 400px; }
+        .footer { background: #f4f4f4; padding: 1rem; margin-top: 2rem; text-align: center; }
+        .debug { background: #ffe6e6; padding: 10px; border: 1px solid #ff9999; margin: 10px 0; }
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <div class="header">
+        <h1>{% block header %}Django Templates Laboratory{% endblock %}</h1>
+        {% if user.is_authenticated %}
+            <p>Chào {{ user.username }}! | <a href="/admin/" style="color: white;">Admin</a></p>
+        {% else %}
+            <p>Khách | <a href="/admin/" style="color: white;">Đăng nhập</a></p>
+        {% endif %}
+    </div>
+
+    <nav class="nav">
+        <a href="{% url 'articles:index' %}">Trang chủ</a>
+        <a href="{% url 'articles:article_list' %}">Danh sách bài viết</a>
+        <a href="{% url 'articles:about' %}">Giới thiệu</a>
+        <a href="{% url 'articles:template_demo' %}">Template Demo</a>
+    </nav>
+
+    <main class="content">
+        {% block content %}
+        <p>Nội dung mặc định - override block này trong template con.</p>
+        {% endblock %}
+    </main>
+
+    <footer class="footer">
+        <p>&copy; {{ current_year }} Django Templates Lab | 
+        Trang web: {{ site_info.name }} | 
+        Thời gian: {{ current_time|date:"d/m/Y H:i:s" }}</p>
+    </footer>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
